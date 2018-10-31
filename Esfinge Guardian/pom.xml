@@ -200,6 +200,7 @@
 			<properties>
 				<annotation.scanner>org.esfinge.guardian.scanner.core.ClasspathAnnotationScanner</annotation.scanner>
 			</properties>
+			
 		</profile>
 	</profiles>
 
