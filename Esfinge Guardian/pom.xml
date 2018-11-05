@@ -10,7 +10,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+
 
 	<build>
 		<testSourceDirectory>test</testSourceDirectory>
@@ -79,11 +82,13 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
 		<dependency>
 			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>3.2.9</version>
+			<artifactId>cglib-nodep</artifactId>
+			<version>3.2.4</version>
 		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
 		<dependency>
@@ -200,7 +205,7 @@
 			<properties>
 				<annotation.scanner>org.esfinge.guardian.scanner.core.ClasspathAnnotationScanner</annotation.scanner>
 			</properties>
-			
+
 		</profile>
 	</profiles>
 

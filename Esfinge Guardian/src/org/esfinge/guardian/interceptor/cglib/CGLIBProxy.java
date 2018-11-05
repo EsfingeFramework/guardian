@@ -2,13 +2,13 @@ package org.esfinge.guardian.interceptor.cglib;
 
 import java.lang.reflect.Method;
 
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
-
 import org.esfinge.guardian.context.WrappedObj;
 import org.esfinge.guardian.exception.ProxyCreationException;
 import org.esfinge.guardian.interceptor.GuardianInterceptor;
+
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 public class CGLIBProxy extends GuardianInterceptor implements MethodInterceptor {
 	

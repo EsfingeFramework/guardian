@@ -1,23 +1,45 @@
 package org.esfinge.guardian.utils;
 
-import java.util.ResourceBundle;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Logger;
 
 public class GuardianConfig {
-	static public ResourceBundle bundle = ResourceBundle.getBundle("META-INF/GuardianConfig");
-	
-	static public String getSubjectKey() {
-		return bundle.getString("subject.key");
+
+	// static public ResourceBundle bundle =
+	// ResourceBundle.getBundle("META-INF/GuardianConfig");
+	static private Properties prop;
+
+	public GuardianConfig() {
+		prop = loadProperties();
 	}
 	
-	static public String getEnvironmentKey() {
-		return bundle.getString("environment.key");
+	public String getSubjectKey() {
+		return prop.getProperty("subject.key");
 	}
-	
-	static public String getResourceKey() {
-		return bundle.getString("resource.key");
+
+	public String getEnvironmentKey() {
+		return prop.getProperty("environment.key");
 	}
-	
-	static public String getKey(String key) {
-		return bundle.getString(key);
+
+	public String getResourceKey() {
+		return prop.getProperty("resource.key");
+	}
+
+	public String getKey(String key) {
+		return prop.getProperty(key);
+	}
+
+	private Properties loadProperties() {
+		if (prop == null) {
+			prop = new Properties();
+			try {
+				prop.load(new FileInputStream("src/META-INF/GuardianConfig.properties"));
+			} catch (IOException e) {
+				Logger.getLogger(this.getClass().getName(), "GuardianConfig could not be loaded: " + e);
+			}
+		}
+		return prop;
 	}
 }
