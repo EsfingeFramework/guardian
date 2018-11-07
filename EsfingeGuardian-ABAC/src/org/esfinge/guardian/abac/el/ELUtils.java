@@ -78,14 +78,15 @@ public class ELUtils {
     
 	static public Map<String, Object> buildVariableMap(AuthorizationContext context) {
 		Map<String, Object> variableMap = new HashMap<String, Object>();
+		GuardianConfig guardianConfig = new GuardianConfig();
 		
-		String subjectKey = GuardianConfig.getSubjectKey();
+		String subjectKey = guardianConfig.getSubjectKey();
 		variableMap.put(subjectKey, context.getSubject().getProps() );
 		
-		String resourceKey = GuardianConfig.getResourceKey();
+		String resourceKey = guardianConfig.getResourceKey();
 		variableMap.put(resourceKey, context.getResource().getProps() );
 		
-		String environmentKey = GuardianConfig.getEnvironmentKey();
+		String environmentKey = guardianConfig.getEnvironmentKey();
 		variableMap.put(environmentKey, context.getEnvironment().getProps() );
 		
 		return variableMap;
