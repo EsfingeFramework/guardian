@@ -9,14 +9,15 @@ import org.esfinge.guardian.rbac.annotation.authorization.DenyRoles;
 import org.esfinge.guardian.rbac.utils.RbacConfig;
 
 public class DenyRolesAuthorizer implements Authorizer<DenyRoles> {
-	
+
 	@Override
 	public Boolean authorize(AuthorizationContext context, DenyRoles denyRoles) {
-		
-		List<String> rolesList = context.getSubject().get(RbacConfig.getRolesKey(), new ArrayList<String>());
-		
+
+		RbacConfig rbacConfig = new RbacConfig();
+		List<String> rolesList = context.getSubject().get(rbacConfig.getRolesKey(), new ArrayList<String>());
+
 		String annotatedRole = denyRoles.value();
-		
+
 		// TODO: handle situations when more than one role is annotated
 		return !rolesList.contains(annotatedRole);
 	}
