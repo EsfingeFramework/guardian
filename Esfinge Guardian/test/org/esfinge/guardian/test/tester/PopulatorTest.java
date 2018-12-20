@@ -16,23 +16,23 @@ import org.junit.Test;
 public class PopulatorTest {
 	private Repository repository;
 	private GuardedInterface gc;
-	
+
 	@Before
 	public void setUp() {
 		repository = MockRepository.createAlwaysAllowDenyAnnotationsRepository();
 		gc = new GuardedClass();
 	}
-	
+
 	@Test
 	public void populationTest() throws Exception {
 		Method guardedMethod = gc.getClass().getMethod("alwaysExecutedMethod");
-		
+
 		AuthorizationContext context = MockAuthorizationContext.createMock(gc, guardedMethod, repository);
 		context.getInvoker().invoke(context);
-		
+		context.getEnvironment().put("my.key", true);
 		boolean shouldBeTrue = context.getEnvironment().get("my.key", Boolean.class);
-		
+
 		assertEquals("This attribute is not into the environment", true, shouldBeTrue);
 	}
-	
+
 }
