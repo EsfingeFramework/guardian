@@ -10,19 +10,21 @@ import org.esfinge.guardian.rbac.entity.Role;
 import org.esfinge.guardian.rbac.utils.RbacConfig;
 
 public class DeclareRolesPopulator implements Populator {
-	
+
 	@Override
 	public void populate(AuthorizationContext context) {
+
+		RbacConfig rbacConfig = new RbacConfig();
 		Set<Role> declareRolesSet = new HashSet<Role>();
-		
+
 		Class<?> clazz = context.getGuardedObj().getClass();
 		if (clazz.isAnnotationPresent(DeclareRoles.class)) {
 			String[] roleNames = clazz.getAnnotation(DeclareRoles.class).value();
 			for (String roleName : roleNames) {
 				declareRolesSet.add(new Role(roleName));
 			}
-			
-			context.getSubject().put(RbacConfig.getRolesKey(), declareRolesSet);
+
+			context.getSubject().put(rbacConfig.getRolesKey(), declareRolesSet);
 		}
 	}
 }
