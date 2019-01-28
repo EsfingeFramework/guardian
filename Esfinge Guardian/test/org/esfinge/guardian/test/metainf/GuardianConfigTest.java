@@ -15,7 +15,7 @@ public class GuardianConfigTest {
 	@Test
 	public void guardianConfigProperties() throws FileNotFoundException, IOException {
 		Properties prop = new Properties();
-		prop.load(new FileInputStream("src/META-INF/GuardianConfig.properties"));
+		prop.load(new FileInputStream("src/META-INF/services/GuardianConfig.properties"));
 		assertNotNull(prop);
 		assertEquals("subject", prop.getProperty("subject.key"));
 	}

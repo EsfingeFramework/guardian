@@ -25,7 +25,7 @@ public class RbacConfig {
 		if (prop == null) {
 			prop = new Properties();
 			try {
-				prop.load(new FileInputStream("src/META-INF/RbacConfig.properties"));
+				prop.load(new FileInputStream("src/META-INF/services/RbacConfig.properties"));
 			} catch (IOException e) {
 				Logger.getLogger(this.getClass().getName(), "GuardianConfig could not be loaded: " + e);
 			}

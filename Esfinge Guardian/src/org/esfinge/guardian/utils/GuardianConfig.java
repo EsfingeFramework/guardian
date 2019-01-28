@@ -35,7 +35,7 @@ public class GuardianConfig {
 		if (prop == null) {
 			prop = new Properties();
 			try {
-				prop.load(new FileInputStream("src/META-INF/GuardianConfig.properties"));
+				prop.load(new FileInputStream("src/META-INF/services/GuardianConfig.properties"));
 			} catch (IOException e) {
 				Logger.getLogger(this.getClass().getName(), "GuardianConfig could not be loaded: " + e);
 			}

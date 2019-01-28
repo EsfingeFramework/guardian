@@ -23,8 +23,8 @@ public class AuthorizationContext {
 	private Repository repository;
 	private WrappedObj<?>[] wrappedObjs;
 
-	public AuthorizationContext(Object guardedObj) {
-		guardObject(guardedObj);
+	public AuthorizationContext() {
+		
 		this.subject = new ContextMap();
 		this.environment = new ContextMap();
 		this.resource = new ContextMap();
