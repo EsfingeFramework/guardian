@@ -9,7 +9,9 @@ import org.esfinge.guardian.invoker.Invoker;
 import org.esfinge.guardian.utils.GuardianConfig;
 
 public class CoreMethodInvoker extends Invoker {
-	private String returnedObjKey = GuardianConfig.getKey("returnedObj.key");
+	
+	private GuardianConfig guardianConfig = new GuardianConfig();
+	private String returnedObjKey = guardianConfig.getKey("returnedObj.key");
 	
 	@Override
 	protected void preInvoke(AuthorizationContext context) throws Exception {

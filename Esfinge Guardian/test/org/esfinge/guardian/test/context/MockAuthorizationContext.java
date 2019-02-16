@@ -3,6 +3,7 @@ package org.esfinge.guardian.test.context;
 import java.lang.reflect.Method;
 
 import org.esfinge.guardian.context.AuthorizationContext;
+import org.esfinge.guardian.init.CachedAuthorizers;
 import org.esfinge.guardian.init.Repository;
 import org.esfinge.guardian.invoker.Invoker;
 import org.esfinge.guardian.test.GuardedInterface;
@@ -21,7 +22,7 @@ public class MockAuthorizationContext {
 		context.setGuardedMethod(guardedMethod);
 		context.setInvoker(invoker);
 		context.setRepository(repository);
-		
+		context.getRepository().setCachedAuthorizers(new CachedAuthorizers());
 		return context;
 	}
 }

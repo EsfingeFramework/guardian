@@ -13,7 +13,6 @@ public class RoleTester {
 	@Test
 	public void testAccessToProtectedResourceWithProperRole() {
 		GuardedRBACInterface gc = AuthorizationContext.guardObject(new GuardedRBACClass());
-		
 		assertEquals("This method must always execute", true, gc.executableByAnyoneWithRoleAdministrator() );
 		
 	}

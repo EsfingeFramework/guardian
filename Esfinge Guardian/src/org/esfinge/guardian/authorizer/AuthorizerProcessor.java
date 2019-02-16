@@ -19,7 +19,7 @@ public class AuthorizerProcessor {
 		
 		Set<Annotation> authorizationAnnotations = 
 							AuthorizerUtils.getAuthorizationAnnotations(
-									context, guardedMethod.getDeclaredAnnotations()); 
+									context, guardedMethod.getAnnotations()); 
 		
 		boolean authorized = true;
 		if ( !authorizationAnnotations.isEmpty() ) {

@@ -1,5 +1,6 @@
 package org.esfinge.guardian.test.tester;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -32,6 +33,6 @@ public class ServiceLocatorTest {
 		List<TestListInterface> lista = ServiceLocator.getServiceImplementationList(TestListInterface.class);
 		boolean t1 = (lista.get(1) instanceof TestImplementation1);
 		boolean t2 = (lista.get(0) instanceof TestImplementation2);
-		assertTrue(!t1 && !t2);
+		assertFalse(t1 && t2);
 	}
 }

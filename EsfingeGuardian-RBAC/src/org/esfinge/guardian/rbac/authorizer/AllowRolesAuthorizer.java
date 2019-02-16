@@ -14,7 +14,9 @@ public class AllowRolesAuthorizer implements Authorizer<AllowRoles> {
 	
 	@Override
 	public Boolean authorize(AuthorizationContext context, AllowRoles allowRoles) {
-		Set<Role> subjectRoles = context.getSubject().get(RbacConfig.getRolesKey(), new HashSet<Role>());
+		
+		RbacConfig rbacConfig = new RbacConfig();
+		Set<Role> subjectRoles = context.getSubject().get(rbacConfig.getRolesKey(), new HashSet<Role>());
 		Set<Role> annotatedRoles = new HashSet<Role>();
 		
 		String[] annotatedRolesNames = allowRoles.value();
