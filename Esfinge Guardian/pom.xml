@@ -3,10 +3,44 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.esfinge.guardian</groupId>
-	<artifactId>esfinge-guardian</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<groupId>net.sf.esfinge</groupId>
+	<artifactId>guardian</artifactId>
+	<version>1.2.0</version>
+	<packaging>pom</packaging>
+
+	<name>Esfinge Guardian</name>
+	<url>http://esfinge.sourceforge.net/</url>
+	<description>The Esfinge Guardian is a matadata based framework applicable to systems requiring authorizations, regardless of the domain, this framework implements RBAC, ABAC, MAC subprojects.</description>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Eduardo Guerra</name>
+			<email>guerraem@gmail.com</email>
+			<organization />
+			<organizationUrl />
+		</developer>
+		<developer>
+			<name>Weslei Luiz de Paula Pinto</name>
+			<email>weslei.paula@fatec.sp.gov.br</email>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/EsfingeFramework/guardian.git</connection>
+		<developerConnection>scm:git:ssh://github.com:EsfingeFramework/guardian.git</developerConnection>
+		<url>http://github.com/EsfingeFramework/guardian/tree/master</url>
+		<tag>guardian-1.2.0</tag>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,10 +48,108 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<modules>
+		<module>../EsfingeGuardian-ABAC</module>
+		<module>../EsfingeGuardian-RBAC</module>
+		<module>../EsfingeGuardian-MAC</module>
+	</modules>
 
 	<build>
 		<testSourceDirectory>test</testSourceDirectory>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- This tag it's optional see https://issues.sonatype.org/browse/OSSRH-22221 
+				issue -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.sonatype.plugins</groupId> -->
+			<!-- <artifactId>nexus-staging-maven-plugin</artifactId> -->
+			<!-- <version>1.6.7</version> -->
+			<!-- <extensions>true</extensions> -->
+			<!-- <configuration> -->
+			<!-- <serverId>ossrh</serverId> -->
+			<!-- <nexusUrl>https://oss.sonatype.org/</nexusUrl> -->
+			<!-- <autoReleaseAfterClose>true</autoReleaseAfterClose> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -53,55 +185,10 @@
 
 	<dependencies>
 
-		<!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm</artifactId>
-			<version>6.2.1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.9.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
-		<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
 			<version>3.2.4</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/javax.el/el-api -->
-		<dependency>
-			<groupId>javax.el</groupId>
-			<artifactId>el-api</artifactId>
-			<version>2.2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
@@ -109,20 +196,6 @@
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.23.1-GA</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.jboss.el/jboss-el -->
-		<dependency>
-			<groupId>org.jboss.el</groupId>
-			<artifactId>jboss-el</artifactId>
-			<version>2.0.2.CR1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.jboss.spec.javax.faces/jboss-jsf-api_2.1_spec -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.faces</groupId>
-			<artifactId>jboss-jsf-api_2.1_spec</artifactId>
-			<version>2.1.28.Final</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core -->
@@ -140,41 +213,6 @@
 			<version>1.0.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>5.1.2.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-asm -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-asm</artifactId>
-			<version>3.1.4.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>5.1.2.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>5.1.2.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-expression</artifactId>
-			<version>5.1.2.RELEASE</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -182,7 +220,6 @@
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>

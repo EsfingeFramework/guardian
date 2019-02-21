@@ -6,7 +6,7 @@ import org.esfinge.guardian.abac.el.ELUtils;
 import org.junit.Test;
 
 public class ELPatternTest {
-	String chars = "0123456789qwertyuiopasdfghjklçzxcvbnm!.=><+-*/~;:|\\";
+	String chars = "0123456789qwertyuiopasdfghjklï¿½zxcvbnm!.=><+-*/~;:|\\";
 	
 	@Test
 	public void testELMatching() {
