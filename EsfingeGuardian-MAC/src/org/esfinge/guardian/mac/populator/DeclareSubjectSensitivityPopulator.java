@@ -10,12 +10,13 @@ public class DeclareSubjectSensitivityPopulator implements Populator {
 
 	@Override
 	public void populate(AuthorizationContext context) {
+		MacConfig config = new MacConfig();
 		Class<?> clazz = context.getGuardedObj().getClass();
 		Level level = null;
 		if (clazz.isAnnotationPresent(DeclareSubjectSensitivity.class)) {
 			level = (Level) clazz.getAnnotation(DeclareSubjectSensitivity.class).value();
 			
-			context.getSubject().put(MacConfig.getAuthorizationLevelKey(), level);
+			context.getSubject().put(config.getAuthorizationLevelKey(), level);
 		}
 	}
 }

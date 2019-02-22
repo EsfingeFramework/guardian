@@ -15,7 +15,7 @@ public class SensitivityLevelAuthorizer implements Authorizer<Annotation> {
 	@Override
 	public Boolean authorize(AuthorizationContext context, Annotation sensitivityLevel) {
 		Class<? extends Annotation> sensitivityType = sensitivityLevel.annotationType();
-		
+		MacConfig config = new MacConfig();
 		Method value = null;
 		try {
 			value = sensitivityType.getMethod("value");
@@ -31,7 +31,7 @@ public class SensitivityLevelAuthorizer implements Authorizer<Annotation> {
 		Enum<?> subjectAuthorizationLevel = 
 				context.
 					getSubject().
-						get(MacConfig.getAuthorizationLevelKey(), Enum.class);
+						get(config.getAuthorizationLevelKey(), Enum.class);
 		
 		if (subjectAuthorizationLevel == null) {
 			throw new EnumNotDefinedException("An authorization level must be defined for the subject");
