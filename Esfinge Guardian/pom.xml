@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>net.sf.esfinge</groupId>
 		<artifactId>guardian</artifactId>
-		<version>1.2.2</version>
+		<version>1.2.3</version>
 	</parent>
 	<artifactId>guardian-core</artifactId>
 	<packaging>jar</packaging>
@@ -39,16 +39,19 @@
 				<directory>src/META-INF/services</directory>
 				<filtering>true</filtering>
 			</resource>
+
+			<resource>
+				<directory>src/META-INF</directory>
+				<targetPath>META-INF</targetPath>
+			</resource>
+			<resource>
+				<directory>src/META-INF/GuardianConfig.properties</directory>
+				<targetPath>src/META-INF</targetPath>
+			</resource>
 		</resources>
 	</build>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-		</dependency>
 
 	</dependencies>
 
