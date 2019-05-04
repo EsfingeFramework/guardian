@@ -1,6 +1,5 @@
 package org.esfinge.guardian.utils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -35,8 +34,9 @@ public class GuardianConfig {
 		if (prop == null) {
 			prop = new Properties();
 			try {
-				prop.load(new FileInputStream("src/META-INF/services/GuardianConfig.properties"));
-			} catch (IOException e) {
+				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				prop.load(classLoader.getResourceAsStream("META-INF/services/GuardianConfig.properties"));
+			} catch (IOException | NullPointerException e) {
 				Logger.getLogger(this.getClass().getName(), "GuardianConfig could not be loaded: " + e);
 			}
 		}
